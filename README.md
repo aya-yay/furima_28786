@@ -2,82 +2,82 @@
 
 ## users テーブル
 
-| Column    | Type   | Options     |
-| --------- | ------ | ----------- |
-| nickname  | string | null: false |
-| email     | string | null: false |
-| password  | string | null: false |
+| Column            | Type   | Options     |
+| ------------------| ------ | ----------- |
+| nickname          | string | null: false |
+| email             | string | null: false |
+| password          | string | null: false |
+| family_name       | string | null: false |
+| first_name        | string | null: false |
+| family_name_kana  | string | null: false |
+| first_name_kana   | string | null: false |
+| birth_date        | date   | null: false |
 
 ### Association
 
 - has_many :items
 - has_many :comments
-- has_one :profile
-- has_one :credit_card
 - has_one :delivery_address
 
 ## items テーブル
 
-| Column    | Type    | Options     |
-| --------- | ------- | ----------- |
-| image     | string  | null: false |
-| name      | string  | null: false |
-| category  | string  | null: false |
-| price     | integer | null: false |
-| exhibitor | string  | null: false |
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| image        | string     | null: false                    |
+| item_name    | string     | null: false                    |
+| description  | string     | null: false                    |
+| category     | integer    | null: false                    |
+| condition    | integer    | null: false                    |
+| delivery_fee | integer    | null: false                    |
+| state        | integer    | null: false                    |
+| days         | integer    | null: false                    |
+| price        | integer    | null: false                    |
+| user         | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
+- belongs_to :user
 - has_many :comments
-
 
 ## comments テーブル
 
 | Column   | Type       | Options                        |
 | -------- | ---------- | ------------------------------ |
-| user_id  | references | null: false, foreign_key: true |
-| items_id | references | null: false, foreign_key: true |
-| content  | string     |                                |
+| user     | references | null: false, foreign_key: true |
+| item     | references | null: false, foreign_key: true |
+| content  | text       |                                |
 
 ### Association
 
-- belongs_to :items
-- belongs_to :user
-
-## profile テーブル
-
-| Column                | Type   | Options     |
-| --------------------- | -------| ----------- |
-| family_name           | string | null: false |
-| first_name            | string | null: false |
-| family_name_kana      | string | null: false |
-| first_name_kana       | string | null: false |
-| birth_date            | string | null: false |
-
-### Association
-
-- belongs_to :user
-
-## credit_card テーブル
-
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------------------- |
-| credit_number | string     |                                             |
-| user_id       | string     | references | null: false, foreign_key: true |
-
-### Association
-
+- belongs_to :item
 - belongs_to :user
 
 ## delivery_address テーブル
 
-| Column    | Type       | Options                                     |
-| --------- | ---------- | ------------------------------------------- |
-| location  | string     | null: false                                 |
-| user_id   | string     | references | null: false, foreign_key: true |
-| items_id  | string     | references | null: false, foreign_key: true |
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| postal_code  | integer    | null: false                    |
+| state        | string     | null: false                    |
+| city         | string     | null: false                    |
+| address_line | string     | null: false                    |
+| building_name| string     | null: false                    |
+| phone_number | integer    | null: false                    |
+| user         | references | null: false, foreign_key: true |
+| item         | references | null: false, foreign_key: true |
 
 ### Association
 
+- belongs_to :user
+
+
+## transaction テーブル
+
+| Column   | Type       | Options                        |
+| -------- | ---------- | ------------------------------ |
+| user     | references | null: false, foreign_key: true |
+| item     | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :item
 - belongs_to :user
