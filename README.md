@@ -34,7 +34,7 @@
 
 - belongs_to :user
 - has_many :comments
-- has_many :purchase_items
+- has_one :purchase_items
 
 ## comments テーブル
 
