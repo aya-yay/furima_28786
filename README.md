@@ -27,6 +27,11 @@
 | image        | string     | null: false                    |
 | name         | string     | null: false                    |
 | description  | text       | null: false                    |
+| category     | integer    | null: false                    |
+| condition    | integer    | null: false                    |
+| delivery_fee | integer    | null: false                    |
+| state        | integer    | null: false                    |
+| days         | integer    | null: false                    |
 | price        | integer    | null: false                    |
 | user         | references | null: false, foreign_key: true |
 
@@ -34,7 +39,7 @@
 
 - belongs_to :user
 - has_many :comments
-- has_one :purchase_items
+- has_one :purchase_item
 
 ## comments テーブル
 
