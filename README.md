@@ -63,12 +63,12 @@
 | address_line  | string     | null: false,                   |
 | building_name | string     |                                |
 | phone_number  | string     | null: false                    |
-| purchase_item | string     | null: false, foreign_key: true |
+| purchase_item | references | null: false, foreign_key: true |
 
 
 ### Association
 
-- has_one :purchase_item
+- belongs_to :purchase_item
 
 
 ## purchase_items テーブル
@@ -80,6 +80,6 @@
 
 ### Association
 
-- belongs_to :delivery_address
+- has_one :delivery_address
 - belongs_to :item
 - belongs_to :user
