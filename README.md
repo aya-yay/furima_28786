@@ -27,11 +27,6 @@
 | image        | string     | null: false                    |
 | name         | string     | null: false                    |
 | description  | text       | null: false                    |
-| category     | integer    | null: false                    |
-| condition    | integer    | null: false                    |
-| delivery_fee | integer    | null: false                    |
-| state        | integer    | null: false                    |
-| days         | integer    | null: false                    |
 | price        | integer    | null: false                    |
 | user         | references | null: false, foreign_key: true |
 
@@ -59,7 +54,6 @@
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | postal_code   | string     | null: false,                   |
-| state         | string     | null: false,                   |
 | city          | string     | null: false,                   |
 | address_line  | string     | null: false,                   |
 | building_name | string     |                                |
