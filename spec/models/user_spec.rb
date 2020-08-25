@@ -4,6 +4,7 @@ RSpec.describe User, type: :model do
 
   before do
     @user = FactoryBot.build(:user)
+    @gimei = Gimei.name
   end
 
   describe 'ユーザー新規登録' do
@@ -41,6 +42,12 @@ RSpec.describe User, type: :model do
         expect(another_user.errors.full_messages).to include("Eメールはすでに存在します")
       end
 
+      it "email に＠がなければ登録できない" do
+        @user.email = "1234hello.com"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Eメールは不正な値です")
+      end
+
       it "passwordが空では登録できない" do
         @user.password = ""
         @user.valid?
@@ -64,11 +71,25 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("姓を入力してください")
       end
+
+      it "family_nameがカタカナ以外では登録できない" do
+        @user.family_name =! @gimei.last.katakana 
+        @user.valid?
+        expect(@user.errors.full_messages).to include("姓は不正な値です")
+      end
+
       it "first_nameが空では登録できない" do
         @user.first_name = ""
         @user.valid?
         expect(@user.errors.full_messages).to include("名を入力してください")
       end
+
+      it "first_nameがカタカナ以外では登録できない" do
+        @user.first_name =! @gimei.first.katakana 
+        @user.valid?
+        expect(@user.errors.full_messages).to include("名は不正な値です")
+      end
+
       it "family_name_kanaが空では登録できない" do
         @user.family_name_kana = ""
         @user.valid?
