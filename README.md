@@ -59,7 +59,6 @@
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | postal_code   | string     | null: false,                   |
-| state         | integer    | null: false,                   |
 | city          | string     | null: false,                   |
 | address_line  | string     | null: false,                   |
 | building_name | string     |                                |
