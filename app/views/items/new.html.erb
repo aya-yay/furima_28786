@@ -7,9 +7,8 @@
     <h2 class="items-sell-title">商品の情報を入力</h2>
     <%= form_with model: @item, url:items_path, local: true do |f| %>
 
-    <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
+    <%# エラー発生時のメッセージ%>
    <%= render 'shared/error_messages', model: f.object %>
-    <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
 
     <%# 出品画像 %>
     <div class="img-upload">
@@ -87,7 +86,7 @@
     <%# /配送について %>
 
     <%# 販売価格 %>
-    <script src="/javascript/new.js">
+   
       <div class="sell-price">
         <div class="weight-bold-text question-text">
           <span>販売価格<br>(¥300〜9,999,999)</span>
@@ -116,7 +115,7 @@
           </span>
         </div>
       </div>
-    </script>
+  
     <%# /販売価格 %>
 
     <%# 注意書き %>

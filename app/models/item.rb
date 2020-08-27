@@ -19,9 +19,5 @@ class Item < ApplicationRecord
   validates :delivery_fee_id, presence: true, numericality: { other_than: 1 }
   validates :state_id, presence: true, numericality: { other_than: 1 }
   validates :day_id, presence: true, numericality: { other_than: 1 }
-  validates :price, presence: true , format: { with: /\A[a-z0-9]+\z/i }, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
-
-
-
-
+  validates :price, presence: true, format: { with: /\A[a-z0-9]+\z/i }, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 end
