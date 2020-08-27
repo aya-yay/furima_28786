@@ -1,4 +1,11 @@
 class Item < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to_active_hash :category
+  belongs_to_active_hash :condition
+  belongs_to_active_hash :delivery_fee
+  belongs_to_active_hash :state
+  belongs_to_active_hash :day
+
   belongs_to :user
   has_many :comments
   has_one :purchase_item
@@ -7,13 +14,14 @@ class Item < ApplicationRecord
   validates :image, presence: true
   validates :name, presence: true
   validates :description, presence: true
-  validates :category, presence: true
-  validates :condition, presence: true
-  validates :delivery_fee, presence: true
-  validates :state, presence: true
-  validates :days, presence: true
-  validates :price, presence: true, :greater_than_or_equal_to => 300, :less_than_or_equal_to => 9999999,  format: { with: /\A[a-z0-9]+\z/i }
-  
-  # 入力された販売価格によって、非同期的に販売手数料や販売利益が変わること(JavaScriptを使用して実装すること)
-  # - エラーハンドリングができていること（適切では無い値が入力された場合、情報は保存されず、エラーメッセージを出力させる）
+  validates :category_id, presence: true, numericality: { other_than: 1 }
+  validates :condition_id, presence: true, numericality: { other_than: 1 }
+  validates :delivery_fee_id, presence: true, numericality: { other_than: 1 }
+  validates :state_id, presence: true, numericality: { other_than: 1 }
+  validates :day_id, presence: true, numericality: { other_than: 1 }
+  validates :price, presence: true , format: { with: /\A[a-z0-9]+\z/i }, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
+
+
+
+
 end

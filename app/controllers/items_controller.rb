@@ -1,19 +1,28 @@
 class ItemsController < ApplicationController
   def index
+    @items = Item.includes(:user).order("created_at DESC")
   end
 
   def new
+    @item = Item.new
   end
 
   def create
+    @item = Item.new(item_params)
+    # if @item.valid?
+    if @item.save
+       redirect_to root_path
+    else
+       render 'new'
+    end
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:image, :name, :description,:category, :condition, :delivery_fee, :state, :days, :price).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :name, :description, :category_id, :condition_id, :delivery_fee_id, :state_id, :day_id, :price).merge(user_id: current_user.id)
   end
-
+ 
 
 
 end
