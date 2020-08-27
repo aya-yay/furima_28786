@@ -61,7 +61,7 @@ RSpec.describe Item, type: :model do
       end
 
       it '価格の範囲が300円〜9999999円の範囲でなければ商品の出品ができない' do
-        if @item.price = be_between(300, 9999999).inclusive
+        if @item.price = be_between(300, 9_999_999).inclusive
           @item.valid?
           expect(@item.errors.full_messages).to include('価格は不正な値です')
         end
@@ -72,8 +72,6 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('ユーザーを入力してください')
       end
-
-      
     end
   end
 end
