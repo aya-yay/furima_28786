@@ -10,5 +10,13 @@ ja:
        birth_date: 生年月日
 
      item:
-       text: テキスト
-       image: 画像
+      image: 画像
+      name: 商品名
+      description: 商品の説明
+      category_id: カテゴリ
+      condition_id: 商品の状態
+      delivery_fee_id: 発送料
+      state_id: 発送元の地域
+      day_id: 発送までの日数
+      price: 価格
+      user: ユーザー
