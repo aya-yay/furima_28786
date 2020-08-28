@@ -17,10 +17,10 @@ class ItemsController < ApplicationController
     end
   end
 
-  def show
-    @item = @item.includes(:user)
-    redirect_to item_path(id: current_user)
-  end
+  # def show
+  #   @item = @item.includes(:user)
+  #   redirect_to item_path(id: current_user)
+  # end
 
   private
 
