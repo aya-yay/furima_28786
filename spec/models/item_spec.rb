@@ -30,29 +30,54 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('商品の説明を入力してください')
       end
       it 'カテゴリがなければ商品の出品ができない' do
-        @item.category = nil
+        @item.category_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('カテゴリを入力してください')
       end
+      it 'カテゴリで--を選択すると出品ができない' do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include('カテゴリは1以外の値にしてください')
+      end
       it '商品の状態がなければ商品の出品ができない' do
-        @item.condition = nil
+        @item.condition_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('商品の状態を入力してください')
       end
+      it '商品の状態で--を選択すると出品ができない' do
+        @item.condition_id  = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include('商品の状態は1以外の値にしてください')
+      end
       it '配送料の負担がなければ商品の出品ができない' do
-        @item.delivery_fee = nil
+        @item.delivery_fee_id = { id: 1, name: '--' }
         @item.valid?
         expect(@item.errors.full_messages).to include('発送料を入力してください')
       end
+      it '配送料の負担で--を選択すると出品ができない' do
+        @item.delivery_fee_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include('発送料は1以外の値にしてください')
+      end
       it '発送元の地域がなければ商品の出品ができない' do
-        @item.state = nil
+        @item.state_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('発送元の地域を入力してください')
       end
+      it '発送元の地域で--を選択すると出品ができない' do
+        @item.state_id  = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include('発送元の地域は1以外の値にしてください')
+      end
       it '発送までの日数がなければ商品の出品ができない' do
-        @item.day = nil
+        @item.day_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('発送までの日数を入力してください')
+      end
+      it '発送までの日数で--を選択すると出品ができない' do
+        @item.day_id  = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include('発送までの日数は1以外の値にしてください')
       end
       it '価格がなければ商品の出品ができない' do
         @item.price = nil
@@ -66,6 +91,7 @@ RSpec.describe Item, type: :model do
           expect(@item.errors.full_messages).to include('価格は不正な値です')
         end
       end
+
 
       it 'Userが紐づいていなければ商品の出品ができない' do
         @item.user = nil
