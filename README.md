@@ -31,7 +31,7 @@
 | condition    | integer    | null: false                    |
 | delivery_fee | integer    | null: false                    |
 | state        | integer    | null: false                    |
-| days         | integer    | null: false                    |
+| day          | integer    | null: false                    |
 | price        | integer    | null: false                    |
 | user         | references | null: false, foreign_key: true |
 
