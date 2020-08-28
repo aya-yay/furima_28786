@@ -11,13 +11,23 @@ class Item < ApplicationRecord
   has_one :purchase_item
   has_one_attached :image
 
-  validates :image, presence: true
-  validates :name, presence: true
-  validates :description, presence: true
-  validates :category_id, presence: true, numericality: { other_than: 1 }
-  validates :condition_id, presence: true, numericality: { other_than: 1 }
-  validates :delivery_fee_id, presence: true, numericality: { other_than: 1 }
-  validates :state_id, presence: true, numericality: { other_than: 1 }
-  validates :day_id, presence: true, numericality: { other_than: 1 }
-  validates :price, presence: true, format: { with: /\A[a-z0-9]+\z/i }, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+  with_options presence: true do
+    validates :image
+    validates :name
+    validates :description
+    validates :category_id
+    validates :condition_id
+    validates :delivery_fee_id
+    validates :state_id
+    validates :day_id
+    validates :price, format: { with: /\A[a-z0-9]+\z/i }, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+  end
+
+  with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :condition_id
+    validates :delivery_fee_id
+    validates :state_id
+    validates :day_id
+  end
 end
