@@ -17,10 +17,14 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show
+    @item = @item.includes(:user)
+    redirect_to item_path(id: current_user)
+  end
+
   private
 
   def item_params
     params.require(:item).permit(:image, :name, :description, :category_id, :condition_id, :delivery_fee_id, :state_id, :day_id, :price).merge(user_id: current_user.id)
   end
-
 end
