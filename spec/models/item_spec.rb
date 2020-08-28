@@ -45,7 +45,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('商品の状態を入力してください')
       end
       it '商品の状態で--を選択すると出品ができない' do
-        @item.condition_id  = 1
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('商品の状態は1以外の値にしてください')
       end
@@ -65,7 +65,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('発送元の地域を入力してください')
       end
       it '発送元の地域で--を選択すると出品ができない' do
-        @item.state_id  = 1
+        @item.state_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('発送元の地域は1以外の値にしてください')
       end
@@ -75,7 +75,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('発送までの日数を入力してください')
       end
       it '発送までの日数で--を選択すると出品ができない' do
-        @item.day_id  = 1
+        @item.day_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('発送までの日数は1以外の値にしてください')
       end
@@ -91,7 +91,6 @@ RSpec.describe Item, type: :model do
           expect(@item.errors.full_messages).to include('価格は不正な値です')
         end
       end
-
 
       it 'Userが紐づいていなければ商品の出品ができない' do
         @item.user = nil
