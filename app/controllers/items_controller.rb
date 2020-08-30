@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :item_tweet, only: [:show]
+
   def index
     @items = Item.includes(:user).order('created_at DESC')
   end
@@ -17,9 +19,23 @@ class ItemsController < ApplicationController
     end
   end
 
-  # def show
-  #   @item = @item.includes(:user)
-  #   redirect_to item_path(id: current_user)
+  def show
+  end
+
+  # def edit
+  #   @item = Item.find(params[:id])
+  # end
+
+  # def update
+  #   item = Item.find(params[:id])
+  #   item.update(item_params)
+  #   redirect_to root_path
+  # end
+
+  # def destroy
+  #   item = Item.find(params[:id])
+  #   item.destroy
+  #   redirect_to root_path
   # end
 
   private
@@ -27,4 +43,9 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:image, :name, :description, :category_id, :condition_id, :delivery_fee_id, :state_id, :day_id, :price).merge(user_id: current_user.id)
   end
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
 end
