@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :item_tweet, only: [:show]
-
+  before_action :set_item, only: [:show, :edit, :update]
+  before_action :move_to_index, except: [:index, :show]
+ 
   def index
     @items = Item.includes(:user).order('created_at DESC')
   end
@@ -22,15 +23,17 @@ class ItemsController < ApplicationController
   def show
   end
 
-  # def edit
-  #   @item = Item.find(params[:id])
-  # end
+  def edit
+  end
 
-  # def update
-  #   item = Item.find(params[:id])
-  #   item.update(item_params)
-  #   redirect_to root_path
-  # end
+  def update
+    if @item.update(item_params)
+      redirect_to root_path
+    else
+      render 'edit'
+    end
+  end
+
 
   # def destroy
   #   item = Item.find(params[:id])
@@ -46,6 +49,12 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def move_to_index
+    unless user_signed_in?
+      redirect_to action: :index
+    end
   end
 
 end
