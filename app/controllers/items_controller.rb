@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :item_tweet, only: [:show]
+
   def index
     @items = Item.includes(:user).order('created_at DESC')
   end
@@ -18,8 +20,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
-    # @user = User.new
   end
 
   # def edit
@@ -43,4 +43,9 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:image, :name, :description, :category_id, :condition_id, :delivery_fee_id, :state_id, :day_id, :price).merge(user_id: current_user.id)
   end
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
 end
