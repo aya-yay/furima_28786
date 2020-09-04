@@ -8,5 +8,5 @@ window.addEventListener('load', function(){
       const profitCalc = itemPriceId - addTaxPriceId 
       addTaxPrice.innerHTML = addTaxPriceId
       profit.innerHTML = profitCalc
-    })
-})
+    });
+});
