@@ -1,9 +1,5 @@
 <% if model.errors.any? %>
 <div class="error-alert">
-<%= I18n.t(“errors.messages.not_saved”,
-                 count: resource.errors.count,
-                 resource: resource.class.model_name.human.downcase)
-       %>
   <ul>
     <% model.errors.full_messages.each do |message| %>
     <li class='error-message'><%= message %></li>

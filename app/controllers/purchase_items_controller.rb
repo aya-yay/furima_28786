@@ -9,7 +9,6 @@ class PurchaseItemsController < ApplicationController
 
   def order # 購入する時のアクションを定義
     @order = PurchaseItem.new(order_params)
-    binding.pry
     if @order.valid?
       pay_item
       @order.save
