@@ -1,5 +1,4 @@
 class PurchaseItemsController < ApplicationController
-  before_action :set_item
   before_action :move_to_index, only: :index
 
   def index
@@ -22,10 +21,6 @@ class PurchaseItemsController < ApplicationController
 
   def order_params
     params.require(:purchase_item).permit(:postal_code, :state_id, :city, :address_line, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
-  end
-
-  def set_item
-    @item = Item.find(params[:item_id])
   end
 
   def pay_item
