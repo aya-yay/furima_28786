@@ -76,3 +76,4 @@ gem 'active_hash'
 
 gem 'rubocop-faker'
 
+gem 'payjp'
