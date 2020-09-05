@@ -9,7 +9,6 @@ class PurchaseItemsController < ApplicationController
   def order # 購入する時のアクションを定義
     @order = PurchaseItem.new(order_params)
     if @order.valid?
-      binding.pry
       pay_item
       @order.save
       redirect_to root_path
