@@ -1,7 +1,7 @@
 class PurchaseItemsController < ApplicationController
+  before_action :set_item, only: [:index, :order]
 
   def index
-    @item = Item.find(params[:item_id])
     redirect_to root_path if user_signed_in? && current_user.id == @item.user_id || @item.order != nil
     @order = PurchaseItem.new
   end
@@ -9,6 +9,7 @@ class PurchaseItemsController < ApplicationController
   def order # 購入する時のアクションを定義
     @order = PurchaseItem.new(order_params)
     if @order.valid?
+      binding.pry
       pay_item
       @order.save
       redirect_to root_path
@@ -30,6 +31,10 @@ class PurchaseItemsController < ApplicationController
       card: order_params[:token], # 顧客のトークン
       currency: 'jpy' # 通貨の種類（日本円）
     )
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id]) 
   end
 
 end

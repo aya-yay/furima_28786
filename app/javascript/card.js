@@ -13,7 +13,7 @@ window.addEventListener("DOMContentLoaded", () => {
         exp_month: formData.get("purchase_item[exp_month]"),
         exp_year: `20${formData.get("purchase_item[exp_year]")}`,
       };
-
+      console.log(card);
       Payjp.createToken(card, (status, response) => {
         if (status === 200) {
           const token = response.id;
@@ -34,5 +34,6 @@ window.addEventListener("DOMContentLoaded", () => {
       });
     });
   };
+  // window.addEventListener("load", pay());
+  pay()
 });
-window.addEventListener("load", pay);
