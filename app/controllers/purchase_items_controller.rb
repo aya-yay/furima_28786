@@ -1,9 +1,9 @@
 class PurchaseItemsController < ApplicationController
-  before_action :move_to_index, only: :index
 
   def index
-    @order = PurchaseItem.new
     @item = Item.find(params[:item_id])
+    redirect_to root_path if user_signed_in? && current_user.id == @item.user_id || @item.order != nil
+    @order = PurchaseItem.new
   end
 
   def order # 購入する時のアクションを定義
@@ -32,7 +32,4 @@ class PurchaseItemsController < ApplicationController
     )
   end
 
-  def move_to_index
-    redirect_to root_path if user_signed_in? && current_user.id == @item.user_id || !@item.order.nil?
-  end
 end
